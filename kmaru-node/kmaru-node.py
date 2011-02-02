@@ -18,6 +18,8 @@ r_payload['data']  = {}
 r_payload['data']['uname'] = "tag"
 r_payload['data']['ident'] = "ADBBDA"
 
-
-r_ack = kmaru.lcia.xml_r(r_payload)
-print r_ack;
+try:
+	r_ack = kmaru.lcia.xml_r(r_payload)
+	print r_ack;
+except KeyError as e:
+	print "Error during parsing! " + str(e);
