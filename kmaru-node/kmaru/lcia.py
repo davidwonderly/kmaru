@@ -27,6 +27,17 @@ def xml_r( r_payload ):
 		klass.appendChild(class_text)
 		sid.appendChild(sid_text)
 
+		# OK. Headers locked and loaded.
+
+		data = doc.createElement("data")
+		lcia.appendChild(data)
+
+		for x in r_payload['data']:
+			node = doc.createElement(x)
+			info = doc.createTextNode(r_payload['data'][x])
+			node.appendChild(info)
+			data.appendChild(node)
+
 		xml_string = doc.toprettyxml(indent="  ")
 		return xml_string;
 	except KeyError:
