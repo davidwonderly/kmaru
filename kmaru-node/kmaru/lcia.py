@@ -1,12 +1,31 @@
 #
-# GPL and shit
+# Copyright (c) Paul Tagliamonte
+# GNU GPL-3+, 2011
 #
 
 from xml.dom.minidom import Document
 
-root_node = "lcia"
+required_r_headers = [
+	"class",
+	"sid",
+	"time",
+]
 
-def xml_r( r_payload ):
+required_a_headers = [
+	"class",
+	"sid",
+	"time",
+	"errors",
+	"msg",
+]
+
+def xml_r(payload):
+	return _xml_parse( required_r_headers, payload )
+
+def xml_a(payload):
+	return _xml_parse( required_a_headers, payload )
+
+def _xml_parse( required_headers, payload ):
 	try:
 		doc = Document()
 		lcia = doc.createElement("lcia")
@@ -15,31 +34,22 @@ def xml_r( r_payload ):
 		headers = doc.createElement("headers")
 		lcia.appendChild(headers)
 
-		klass = doc.createElement("class")
-		sid   = doc.createElement("sid")
-
-		headers.appendChild(klass)
-		headers.appendChild(sid)
-
-		class_text = doc.createTextNode(r_payload['class'])
-		sid_text   = doc.createTextNode(str(r_payload['sid']))
-
-		klass.appendChild(class_text)
-		sid.appendChild(sid_text)
-
-		# OK. Headers locked and loaded.
+		for x in required_headers:
+			node = doc.createElement(x)
+			info = doc.createTextNode(str(payload['header'][x]))
+			node.appendChild(info)
+			headers.appendChild(node)
 
 		data = doc.createElement("data")
 		lcia.appendChild(data)
 
-		for x in r_payload['data']:
+		for x in payload['data']:
 			node = doc.createElement(x)
-			info = doc.createTextNode(r_payload['data'][x])
+			info = doc.createTextNode(payload['data'][x])
 			node.appendChild(info)
 			data.appendChild(node)
 
 		xml_string = doc.toprettyxml(indent="  ")
 		return xml_string;
 	except KeyError:
-		print "Oh holyshit"
-	
+		raise KeyError("Missing Header")

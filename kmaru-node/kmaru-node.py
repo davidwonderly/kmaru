@@ -1,13 +1,18 @@
 #!/usr/bin/env python
-
-# OK. Gametime.
+#
+# Copyright (c) Paul Tagliamonte
+# GNU GPL-3+, 2011
+#
 
 import kmaru.lcia
 
-r_payload          = {}
-r_payload['class'] = "auth"
-r_payload['sid']   = 2
-r_payload['time']  = 1234567890
+r_payload           = {}
+r_payload['header'] = {}
+
+r_payload['header']['class'] = "auth"
+r_payload['header']['sid']   = 2
+r_payload['header']['time']  = 1234567890
+
 r_payload['data']  = {}
 
 r_payload['data']['uname'] = "tag"
