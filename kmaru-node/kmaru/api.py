@@ -15,3 +15,18 @@ def auth( session, username, password ):
 	payload['data']['uname']   = username 
 	payload['data']['ident']   = password
 	return payload
+
+
+def autha( session, errors, status, message ):
+	payload           = {}
+	payload['data']   = {}
+	payload['header'] = {}
+
+	payload['header']['sid']    = session
+	payload['header']['time']   = time.time()
+	payload['header']['class']  = "AUTHA"
+	payload['header']['errors'] = errors
+	payload['header']['msg']    = message
+
+	payload['data']['status']   = status
+	return payload
