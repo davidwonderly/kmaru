@@ -30,3 +30,16 @@ def autha( session, errors, status, message ):
 
 	payload['data']['status']   = status
 	return payload
+
+def errora( session, errors, message ):
+	payload           = {}
+	payload['data']   = {}
+	payload['header'] = {}
+
+	payload['header']['sid']    = session
+	payload['header']['time']   = time.time()
+	payload['header']['class']  = "ERRORA"
+	payload['header']['errors'] = errors
+	payload['header']['msg']    = message
+
+	return payload

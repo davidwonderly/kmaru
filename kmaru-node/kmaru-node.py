@@ -4,15 +4,17 @@
 # GNU GPL-3+, 2011
 #
 
-import kmaru.lcia
-import kmaru.api
+import kmaru.server
+import twisted.internet.error
+
+port = 2017
+
+print "We're running kmaru on port " + str(port)
 
 try:
-	payload = kmaru.api.auth("1","paultag","ADBBDA")
-	print kmaru.lcia.xml_r(payload)
-
-	payload = kmaru.api.autha( "1", "0", "OK", "Logged in Fine!" )
-	print kmaru.lcia.xml_a(payload)
-
-except KeyError as e:
-	print "Error sending auth! " + str(e)
+	kmaru.server.run(port)
+except twisted.internet.error.CannotListenError as e:
+	print "Failure to load server. Error follows."
+	print ""
+	print e
+	print ""
