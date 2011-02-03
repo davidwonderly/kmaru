@@ -53,3 +53,4 @@ def _xml_parse( required_headers, payload ):
 		return xml_string;
 	except KeyError:
 		raise KeyError("Missing Header")
+

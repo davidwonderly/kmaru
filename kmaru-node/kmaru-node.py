@@ -12,9 +12,14 @@ port = 2017
 print "We're running kmaru on port " + str(port)
 
 try:
-	kmaru.server.run(port)
+	kmaru.server.runssl(
+		port,
+		"ssl-keys/server.key",
+		"ssl-keys/server.crt"
+	)
 except twisted.internet.error.CannotListenError as e:
 	print "Failure to load server. Error follows."
 	print ""
 	print e
 	print ""
+

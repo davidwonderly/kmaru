@@ -22,7 +22,6 @@ def auth( session, username, password ):
 
 	return payload
 
-
 def autha( session, errors, status, message ):
 	payload = genPayload()
 
@@ -43,3 +42,4 @@ def errora( session, errors, message ):
 	payload['header']['msg']    = message
 
 	return payload
+
