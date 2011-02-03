@@ -3,6 +3,7 @@
 # GNU GPL-3+, 2011
 #
 
+import xml.dom.minidom
 from xml.dom.minidom import Document
 
 required_r_headers = [
@@ -18,6 +19,13 @@ required_a_headers = [
 	"errors",
 	"msg",
 ]
+
+def readString(data):
+	try:
+		xml.dom.minidom.parseString(data)
+		return data
+	except xml.parsers.expat.ExpatError as e:
+		KeyError("Failure to parse XML")
 
 def xml_r(payload):
 	return _xml_parse( required_r_headers, payload )
