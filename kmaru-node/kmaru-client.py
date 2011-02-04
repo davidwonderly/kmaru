@@ -7,6 +7,8 @@
 from twisted.internet import ssl, reactor
 from twisted.internet.protocol import ClientFactory, Protocol
 
+import twisted.internet.error
+
 import kmaru.api
 import kmaru.lcia
 
@@ -41,16 +43,26 @@ class KmaruClient(Protocol):
 class KmaruClientFactory(ClientFactory):
 	protocol = KmaruClient
 
+	def stop(self):
+		try:
+			reactor.stop()
+		except twisted.internet.error.ReactorNotRunning as e:
+			pass
+
 	def clientConnectionFailed(self, connector, reason):
 		print "Connection failed"
-		reactor.stop()
+		self.stop()
 
 	def clientConnectionLost(self, connector, reason):
 		print "Connection lost"
-		reactor.stop()
+		self.stop()
 
 if __name__ == '__main__':
 	factory = KmaruClientFactory()
-	reactor.connectSSL('localhost', 2017, factory, ssl.ClientContextFactory())
+	reactor.connectSSL(
+		'localhost',
+		2017,
+		factory,
+		ssl.ClientContextFactory()
+	)
 	reactor.run()
-
