@@ -34,16 +34,16 @@ def interp_xml(data):
 	headers = {}
 	while heads.nextSibling != None:
 		heads = heads.nextSibling
-		if heads.nodeType == heads.ELEMENT_NODE: #Fucking fix me, bittttttch.
+		if heads.nodeType == heads.ELEMENT_NODE:
 			headers[heads.nodeName] = heads.childNodes[0].data.strip()
 
 
-	datas = data.getElementsByTagName("data").item(0).childNodes[0]
+	datars = data.getElementsByTagName("data").item(0).childNodes[0]
 	datas = {}
-	while heads.nextSibling != None:
-		heads = heads.nextSibling
-		if heads.nodeType == heads.ELEMENT_NODE: #Fucking fix me, bittttttch.
-			headers[heads.nodeName] = heads.childNodes[0].data.strip()
+	while datars.nextSibling != None:
+		datars = datars.nextSibling
+		if datars.nodeType == datars.ELEMENT_NODE:
+			datas[datars.nodeName] = datars.childNodes[0].data.strip()
 
 
 	ret = {}
@@ -78,7 +78,7 @@ def _xml_parse( required_headers, payload ):
 
 		for x in payload['data']:
 			node = doc.createElement(x)
-			info = doc.createTextNode(payload['data'][x])
+			info = doc.createTextNode(str(payload['data'][x]))
 			node.appendChild(info)
 			data.appendChild(node)
 
