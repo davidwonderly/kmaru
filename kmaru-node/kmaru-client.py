@@ -25,7 +25,18 @@ class KmaruClient(Protocol):
 		self.send_r(login)
 
 	def dataReceived(self, data):
-		print data
+		try:
+			incoming_payload = kmaru.lcia.readString(data)
+
+			try:
+				print "[msg] " + incoming_payload['header']['msg']
+			except KeyError as e:
+				print "[log] Oh shit. Fail. "
+
+		except KeyError as e:
+			print "[log] Failure to parse incoming XML"
+			err = kmaru.api.errora("-1", 1, "Failure to parse XML! Bad format!")
+			self.send_a(err)
 
 class KmaruClientFactory(ClientFactory):
 	protocol = KmaruClient

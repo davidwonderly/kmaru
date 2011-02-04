@@ -5,7 +5,7 @@
 #
 
 UsernameDatabase = {
-	"paultag" : "DBAABD"
+	"paultag" : "hey"
 }
 
 def getUserPassword(username):
