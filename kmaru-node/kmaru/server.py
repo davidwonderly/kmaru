@@ -23,6 +23,8 @@ class KmaruServerMain(protocol.Protocol):
 			print "[log] incoming XML"
 			incoming_payload = kmaru.lcia.readString(data)
 			print "[log] good request."
+			print "[log] class: " + incoming_payload['header']['class']
+
 		except KeyError as e:
 			print "[log] Failure to parse incoming XML"
 			err = kmaru.api.errora("-1", 1, "Failure to parse XML! Bad format!")

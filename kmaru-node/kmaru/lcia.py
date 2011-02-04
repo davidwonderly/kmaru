@@ -22,10 +22,35 @@ required_a_headers = [
 
 def readString(data):
 	try:
-		xml.dom.minidom.parseString(data)
-		return data
+		data = xml.dom.minidom.parseString(data)
+		payload = interp_xml(data)
+		return payload
 	except xml.parsers.expat.ExpatError as e:
 		KeyError("Failure to parse XML")
+
+def interp_xml(data):
+
+	heads = data.getElementsByTagName("headers").item(0).childNodes[0]
+	headers = {}
+	while heads.nextSibling != None:
+		heads = heads.nextSibling
+		if heads.nodeType == heads.ELEMENT_NODE: #Fucking fix me, bittttttch.
+			headers[heads.nodeName] = heads.childNodes[0].data.strip()
+
+
+	datas = data.getElementsByTagName("data").item(0).childNodes[0]
+	datas = {}
+	while heads.nextSibling != None:
+		heads = heads.nextSibling
+		if heads.nodeType == heads.ELEMENT_NODE: #Fucking fix me, bittttttch.
+			headers[heads.nodeName] = heads.childNodes[0].data.strip()
+
+
+	ret = {}
+	ret['header'] = headers
+	ret['data']   = datas
+
+	return ret
 
 def xml_r(payload):
 	return _xml_parse( required_r_headers, payload )
