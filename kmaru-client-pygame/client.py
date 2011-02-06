@@ -21,7 +21,7 @@ def main():
     image_height = image.get_height()
 
     offset_w = (width/2  - (image_width/2))
-    offset_h = (height/2 - (image_height/2))
+    offset_h = (height/4 - (image_height/2))
 
     screen.fill(background_color)
 
