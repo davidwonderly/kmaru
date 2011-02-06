@@ -2,4 +2,4 @@ kmaru-basic:
 	twisted
 
 kmaru-client-opengl:
-	python-opengl
+	python-pygame
