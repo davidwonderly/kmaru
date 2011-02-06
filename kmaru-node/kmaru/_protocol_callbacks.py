@@ -1,10 +1,10 @@
-#!/usr/bin/env python
 #
 # Copyright (c) Paul Tagliamonte
 # GNU GPL-3+, 2011
 #
 
 import kmaru.auth
+import kmaru.globals
 
 def authProcessor(ServerMain, payload):
 
@@ -20,17 +20,16 @@ def authProcessor(ServerMain, payload):
 		print "[log] User's password matches."
 		paylard = kmaru.api.autha(
 			payload['header']['sid'], # session
-			"OK",                     # status
-			0,                        # errors
+			0,                        # status
+			kmaru.globals.OK,         # errors
 			"Logged in!"              # Human readable
 		)
 	else:
 		print "[log] User's password does not match."
 		paylard = kmaru.api.autha(
 			payload['header']['sid'], # session
-			"FAIL",                   # status
-			-1,                       # errors
+			-1,                       # status
+			kmaru.globals.FAIL,       # errors
 			"Failed to login!"        # Human readable
 		)
-
 	ServerMain.send_a(paylard)
