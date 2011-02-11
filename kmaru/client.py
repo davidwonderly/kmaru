@@ -11,11 +11,7 @@ import twisted.internet.error
 import kmaru.api
 import kmaru.lcia
 
-import kmaru._client_protocol_callbacks
-
-kmaru_callbacks = {
-	"AUTHA" : kmaru._client_protocol_callbacks.authAnswerProcessor
-}
+import kmaru.protocol_plugins
 
 class KmaruClient(Protocol):
 	def send_a(self, payload):

@@ -10,8 +10,8 @@ import kmaru.hil
 port    = 2017
 host    = "localhost"
 
-uname = kmaru.hil.query("Username")
-ident = kmaru.hil.query("Password")
+uname = "paultag" # kmaru.hil.query("Username")
+ident = "hey"     # kmaru.hil.query("Password")
 
 kmaru.client.runssl(
 	port,
