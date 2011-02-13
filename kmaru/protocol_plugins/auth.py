@@ -11,6 +11,3 @@ class auth:
 
 	def request(payload, protocol):
 		print payload
-
-#kmaru.protocol_plugins.kmaru_callbacks['AUTHA'] = auth
-kmaru.protocol_plugins.loadCallback("AUTH", auth)  #kmaru_callbacks['AUTH']  = auth
