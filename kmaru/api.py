@@ -9,7 +9,7 @@ def genPayload():
 	payload           = {}
 	payload['data']   = {}
 	payload['header'] = {}
-	payload['header']['time']  = time.time()
+	payload['header']['time']  = str(time.time())
 	return payload
 
 def auth( session, username, password ):
