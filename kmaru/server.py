@@ -8,12 +8,7 @@ from twisted.internet.protocol import Factory, Protocol
 
 import kmaru.api
 import kmaru.lcia
-
-import kmaru._protocol_callbacks
-
-kmaru_callbacks = {
-	"AUTH" : kmaru._protocol_callbacks.authProcessor
-}
+import kmaru.protocol_plugins
 
 class KmaruServerMain(protocol.Protocol):
 	def send_a(self, payload):
@@ -26,18 +21,12 @@ class KmaruServerMain(protocol.Protocol):
 
 	def dataReceived(self, data):
 		try:
-			print "[log] incoming XML"
 			incoming_payload = kmaru.lcia.readString(data)
-			print "[log] good request."
-			print "[log] class: " + incoming_payload['header']['class']
-
+			klass = incoming_payload['header']['class']
 			try:
-				kmaru_callbacks[incoming_payload['header']['class']](self, incoming_payload)
+				kmaru.protocol_plugins.kmaru_callbacks[klass](incoming_payload,self)
 			except KeyError as e:
-				print "[log] Oh shit. User fail. " + str(e)
-				# err = kmaru.api.errora("-1", 1, "Failure to parse XML! Bad format!")
-				# self.send_a(err)
-
+				print "Ohfuck, no handle for " + klass
 		except KeyError as e:
 			print "[log] Failure to parse incoming XML"
 			err = kmaru.api.errora("-1", 1, "Failure to parse XML! Bad format!")
