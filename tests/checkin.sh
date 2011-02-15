@@ -1,7 +1,13 @@
 #!/bin/bash
 
 if [ "x$1" != "x--raw" ]; then
-	./checkin.sh --raw | /usr/sbin/sendmail -t -bm -v
+	TEXT=`./checkin.sh --raw`
+
+	if [ $? -ne 0 ]; then
+		echo "Failure. Sending out an email"
+		echo "$TEXT" | /usr/sbin/sendmail -t -bm -v
+	fi
+
 	exit 0
 fi
 
@@ -62,4 +68,5 @@ if [ $ERRORS -ne 0 ]; then
 	echo ""
 	echo "$SIG"
 
+	exit $ERRORS
 fi
