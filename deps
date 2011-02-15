@@ -3,3 +3,6 @@ kmaru-basic:
 
 kmaru-client-opengl:
 	python-pygame
+
+tests:
+	python-unit
