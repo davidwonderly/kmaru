@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "x$1" != "x--raw" ]; then
+	./checkin.sh --raw | /usr/sbin/sendmail -t -bm -v
+	exit 0
+fi
+
 RUNSTAMP=`date "+%s"`
 
 # L:
@@ -18,7 +23,7 @@ RUNSTAMP=`date "+%s"`
 
 RUNLOG=`./run.sh`
 ERRORS=$?
-SAVE="/home/tag/whube/"
+SAVE="/whube/"
 OUTPUTURL="http://logs.whube.com/"
 
 SUBJECT="You have a test failure on kmaru"
