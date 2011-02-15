@@ -16,14 +16,21 @@ GOODNESS=0
 FAILNESS=0
 
 for x in `ls *tests*`; do
-	./$x > ./logs/$x.log 2>&1
-	if [ $? -ne 0 ]; then
+	LOG=`./$x 2>&1`
+	ERRS=$?
+	MODIFIER="null"
+
+	if [ $ERRS -ne 0 ]; then
 		echo -e "L: $x \t\t [ [31mfail[0m ]"
 		let FAILNESS=$FAILNESS+1
+		MODIFIER="failed"
 	else
 		echo -e "L: $x \t\t [  [34mok[0m  ]"
 		let GOODNESS=$GOODNESS+1
+		MODIFIER="success"
 	fi
+
+	echo "$LOG" > ./logs/$x-$MODIFIER.log.txt
 done
 
 echo "L: "

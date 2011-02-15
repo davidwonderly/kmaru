@@ -52,7 +52,7 @@ The Whube Daemon (On behalf of the project)
 
 if [ $ERRORS -ne 0 ]; then
 	mkdir $SAVE/$RUNSTAMP
-	mv ./logs $SAVE/$RUNSTAMP/
+	mv ./logs/* $SAVE/$RUNSTAMP/
 	WHOTOBUG=`echo "$RUNLOG" | \
 		grep "B: " | \
 		awk '{print $2}'`
