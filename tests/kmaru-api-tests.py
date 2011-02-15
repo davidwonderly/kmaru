@@ -6,16 +6,17 @@ import kmaru.lcia
 
 class ApiTestCase(unittest.TestCase):
 	def testAuthPayloadIsValid(self):
-		sessionID = 0
+		sessionID = "0"
 		username  = "paultag"
 		password  = "testtickle"
 
 		payload = kmaru.api.auth(sessionID,username,password)
 		xml_payload = kmaru.lcia.xml_r(payload)
+		print xml_payload
 		payload_two = kmaru.lcia.readString(xml_payload)
 
-		print payload
-		print payload_two
+		print "PI:  " + str(payload)
+		print "PII: " + str(payload_two)
 
 		assert payload == payload_two
 		
