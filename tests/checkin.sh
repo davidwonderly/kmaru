@@ -46,9 +46,9 @@ if [ $ERRORS -ne 0 ]; then
 		grep "B: " | \
 		awk '{print $2}'`
 	echo "Subject: $SUBJECT"
-	echo "From: $FROM"
-	echo "To: $WHOTOBUG"
-	echo "CC: $DEVELADDR"
+	echo "From: Kmaru Bitching Daemon <$FROM>"
+	echo "To: John Q. Hacker <$WHOTOBUG>"
+	echo "CC: Paul Tagliamonte <$DEVELADDR>"
 	echo ""
 	echo "$MESSAGE"
 	echo "You can find the logs on the web[1]."
