@@ -1,1 +1,5 @@
 *.pyc
+kmaru-basic/ssl-keys/*.key
+kmaru-basic/ssl-keys/*.key.org
+kmaru-basic/ssl-keys/*.crt
+kmaru-basic/ssl-keys/*.csr
