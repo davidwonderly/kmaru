@@ -9,8 +9,8 @@ def main():
     pygame.init()
     running = True
 
-    # screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-    screen = pygame.display.set_mode((600,500))
+    screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+    #screen = pygame.display.set_mode((600,500))
 
     width  = screen.get_width()
     height = screen.get_height()
