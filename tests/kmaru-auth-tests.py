@@ -8,11 +8,6 @@ GoodUser = {
 	"idet"  : "heybabyhay"
 }
 
-BadUser = {
-	"uname" : "joeshmo",
-	"idet"  : "letmein"
-}
-
 class AuthTestCase(unittest.TestCase):
 	def setUp(self):
 		global GoodUser
