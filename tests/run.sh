@@ -8,7 +8,6 @@ fi
 
 mkdir logs
 
-echo "N: Startting off tests"
 echo "N: If there's an issue, we're yelling at: $BLAMEGAME"
 echo "L: "
 
