@@ -10,8 +10,7 @@ import twisted.internet.error
 
 import kmaru.api
 import kmaru.lcia
-
-import kmaru.protocol_plugins
+import kmaru.module
 
 class KmaruClient(Protocol):
 	def send_a(self, payload):
@@ -36,7 +35,10 @@ class KmaruClient(Protocol):
 	def dataReceived(self, data):
 		try:
 			incoming_payload = kmaru.lcia.readString(data)
-			kmaru_callbacks[incoming_payload['header']['class']](self, incoming_payload)
+			kmaru.module.runMod(
+				incoming_payload['header']['class'],
+				[incoming_payload, self]
+			);
 
 		except KeyError as e:
 			print "[log] Failure to parse incoming XML"

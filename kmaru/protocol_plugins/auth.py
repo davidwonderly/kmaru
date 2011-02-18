@@ -3,11 +3,21 @@
 # GNU GPL-3+, 2011
 #
 
-import kmaru.protocol_plugins
+import kmaru.module
 
-class auth:
-	def answer(payload, protocol):
-		print payload
+def answer(args):
+	payload  = args[0]
+	protocol = args[1]
 
-	def request(payload, protocol):
-		print payload
+	print payload
+
+def request(args):
+	payload  = args[0]
+	protocol = args[1]
+
+	print payload
+
+
+kmaru.module.addModule(   "AUTH", answer  );
+kmaru.module.addModule(  "AUTHA", request );
+

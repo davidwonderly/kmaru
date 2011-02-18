@@ -24,7 +24,10 @@ class KmaruServerMain(protocol.Protocol):
 			incoming_payload = kmaru.lcia.readString(data)
 			klass = incoming_payload['header']['class']
 			try:
-				kmaru.protocol_plugins.kmaru_callbacks[klass](incoming_payload,self)
+				kmaru.module.runMod(
+					klass,
+					[ incoming_payload, self ]
+				);
 			except KeyError as e:
 				print "Ohfuck, no handle for " + klass
 		except KeyError as e:
